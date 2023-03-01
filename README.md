@@ -1,1 +1,1 @@
-#A basic cart made with fakestoreapi and react
+# A basic cart made with fakestoreapi and react
