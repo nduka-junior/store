@@ -1,47 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import useStoreContext from "../data/useContext";
 
 function Product({ product }) {
-  const { addOneToCart, items, getProductQuantity, removeOneFromCart } =
+  const { addOneToCart, getProductQuantity, removeOneFromCart } =
     useStoreContext();
   const itemQuantity = getProductQuantity(product.id);
   return (
-    <div style={{ margin: "40px", border: "1px solid black", padding: "20px" }}>
-
-
-      <img style={{ width: "150px" }} src={product.image} alt="" />
-      <div>
-        <h3>{product.title}</h3>
-        <h3>${product.price}</h3>
-      </div>
-      {itemQuantity ==0 ? (
-        <button
-          onClick={() => {
-            addOneToCart(product.id);
-          }}
-        >
-          Add to cart
-        </button>
-      ) : (
-        <div>
-          <button
-            onClick={() => {
-              removeOneFromCart(product.id);
-            }}
-          >
-            -
-          </button>
-          <span>{itemQuantity}</span>
-          <button
-            onClick={() => {
-              addOneToCart(product.id);
-            }}
-          >
-            +
-          </button>
+    <Link to={`/product/${product.id}`}>
+      <div className="product">
+        <img src={product.image} alt={product.title} />
+        <div className="bgColor">
+          <div className="product_text">
+            <p style={{marginBottom :'6px'}}>{product.title}</p>
+            <p>${product.price}</p>
+          </div>
+        
         </div>
-      )}
-    </div>
+      </div>
+    </Link>
   );
 }
 

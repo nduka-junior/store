@@ -32,7 +32,7 @@ function ContextProvider({ children }) {
 
 
   const  getProductData = (id) =>{
-    let productData = Products.find((product) => product.id === id);
+    let productData = Products.find((product) => product.id == id);
 
     if (productData === undefined) {
       console.log("Product data does not exist for ID: " + id);

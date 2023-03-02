@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+button{
+     cursor: pointer;
+}
+.color{
+   color: rgba(80, 69, 229, 0.958);
+}
+
+.product_item_buttonsss  {
+  width: 100%;
+  text-align: center;
+  padding: 9px;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-weight: 600;
+  background-color: rgb(79, 69, 229);
+  font-size: 17px;
+}

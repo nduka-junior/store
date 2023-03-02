@@ -1,20 +1,20 @@
 import React from "react";
 import useContext from "../data/useContext";
+import "../static/checkoutitems.css";
 function CheckOutItems({ item }) {
+  console.log(item )
   const { getProductData, deleteFromCart } = useContext();
   const productItems = getProductData(item.id);
   console.log(productItems);
   return (
-    <div style={{ border: "1px solid black", padding: "20px" }}>
-      <img style={{ width: "150px" }} src={productItems.image} alt="" />
-      <div>
-        <h3>{productItems.title}</h3>
-        <h3>${productItems.price}</h3>
-        <h3>Quantity: {item.quantity}</h3>
-      </div>
-      <button onClick={() => {
-deleteFromCart(item.id)
-      }}>Remove From cart</button>
+    <div className="checkoutitems">
+      
+   
+        <img src={productItems.image} alt={productItems.title} />
+        <p>{productItems.title}</p>
+        <p>${productItems.price}</p>
+        <button onClick={() => deleteFromCart(item.id)}>X</button>
+    
     </div>
   );
 }
