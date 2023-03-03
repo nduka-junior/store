@@ -24,7 +24,7 @@ function Checkout() {
                   {/* <h2>Total: ${getTotalCost()}</h2> */}
                 </>
               );
-            })}
+            })} re
           </div>
           <div className="order_summary">
             <h3>Order summary</h3>
