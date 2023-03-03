@@ -12,7 +12,7 @@ function OtherCategory({ category }) {
       <div className="othercat">
         {sortedData.map((item) => {
           return (
-            <Link to={`/product/${item.id}`} key={item.id} className="sss">
+            <Link to={`/store/product/${item.id}`} key={item.id} className="sss">
               <div className="product othercat_main">
                 <img src={item.image} alt={item.title} />
                 <div className="bgColor">

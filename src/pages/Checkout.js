@@ -8,7 +8,7 @@ function Checkout() {
   console.log(items);
   return (
     <div style={{ margin: "40px" }}>
-      <Link to="/" className="color">
+      <Link to="/store" className="color">
         <h3>{"< Home"}</h3>
       </Link>
 

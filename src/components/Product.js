@@ -7,7 +7,7 @@ function Product({ product }) {
     useStoreContext();
   const itemQuantity = getProductQuantity(product.id);
   return (
-    <Link to={`/product/${product.id}`}>
+    <Link to={`/store/product/${product.id}`}>
       <div className="product">
         <img src={product.image} alt={product.title} />
         <div className="bgColor">

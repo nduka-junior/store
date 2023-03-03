@@ -18,7 +18,7 @@ function Category() {
           </button>
         );
       })}
-      <Link to="/checkout">CheckOut</Link>
+      <Link to="/store/checkout">CheckOut</Link>
       <h3>Total items in cart :{items.length}</h3>
     </div>
   );

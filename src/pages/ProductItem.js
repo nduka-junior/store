@@ -16,7 +16,7 @@ function ProductItem() {
   const ProductItem = getProductData(id);
   return (
     <div className="producct">
-      <Link to="/">
+      <Link to="/store">
         <h3 className="color"> {"< Home "}</h3>
       </Link>
       {ProductItem && (
