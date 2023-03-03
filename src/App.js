@@ -13,11 +13,11 @@ function App() {
       element: <Home />,
     },
     {
-      path: "/checkout",
+      path: "/store/checkout",
       element: <Checkout />,
     },
     {
-      path: "/product/:id",
+      path: "/store/product/:id",
       element: <ProductItem />,
     },
   ]);
