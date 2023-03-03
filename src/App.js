@@ -8,7 +8,7 @@ import ProductItem from "./pages/ProductItem";
 
 function App() {
   const router = createBrowserRouter([
-    {
+    {index,
       path: "/",
       element: <Home />,
     },
