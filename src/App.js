@@ -9,7 +9,7 @@ import ProductItem from "./pages/ProductItem";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/store",
       element: <Home />,
     },
     {
