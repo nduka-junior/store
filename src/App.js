@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 import ProductItem from "./pages/ProductItem";
-
+import Nav from "./components/Nav";
 function App() {
   const router = createBrowserRouter([
     {

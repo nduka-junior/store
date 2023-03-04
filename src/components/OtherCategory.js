@@ -2,9 +2,10 @@ import React from "react";
 import useContext from "../data/useContext";
 import { Link } from "react-router-dom";
 import "../static/othercategory.css";
-function OtherCategory({ category }) {
+function OtherCategory({ category ,id}) {
   const { products } = useContext();
-  const sortedData = products.filter((item) => item.category === category);
+  const sortedDatas = products.filter((item) => item.category === category)
+  const sortedData=sortedDatas.filter((item)=>item.id!==id)
   console.log(sortedData);
   return (
     <>
@@ -14,7 +15,7 @@ function OtherCategory({ category }) {
           return (
             <Link to={`/store/product/${item.id}`} key={item.id} className="sss">
               <div className="product othercat_main">
-                <img src={item.image} alt={item.title} />
+                <img src={item.image} alt={item.title} className="sss_img" />
                 <div className="bgColor">
                   <div className="product_text">
                     <p style={{ marginBottom: "6px" }}>{item.title}</p>

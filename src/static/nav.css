@@ -1,0 +1,44 @@
+.nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgb(17,24,39);
+    color: white;
+    padding: 10px;
+}
+.nav_items > button{
+    margin-right: 15px;
+   padding-right: 15px;
+  border: none;
+  text-transform: capitalize;
+  font-size: 15px;
+  background-color: transparent;
+   color: white;
+   font-weight: 6000;
+   border-right: 1px solid white;
+}
+@media only screen and (max-width: 800px) {
+
+  .nav_items > button{
+    margin-right: 10px;
+   padding-right: 4px;
+  }
+}
+.nav_items > button:hover{
+    color: rgb(79, 69, 229);
+ border-color: rgb(79, 69, 229);
+}
+.nav_cart{
+    position: relative;
+    color: white;
+}
+.nav_cart:hover{
+      color: rgb(79, 69, 229);
+}
+.nav_cart > span{
+position: absolute;
+bottom: 0px;
+right: -7px;
+font-weight: 600;
+font-size: 17px;
+}

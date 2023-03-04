@@ -11,7 +11,8 @@ export const StoreContext = createContext({
   deleteFromCart: () => {},
   getTotalCost: () => {},
   setcategorySelected: () => {},
-  getProductData : () => {},
+  getProductData: () => {},
+  loading: false,
 });
 
 //
@@ -20,18 +21,19 @@ function ContextProvider({ children }) {
   const [Products, setProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
   const [categorySelected, setcategorySelected] = useState();
-
+  const [loading, setLoading] = useState(false);
   // fetch data
   const requestData = async () => {
+    setLoading(true);
     // category
     setCategory(await fetchCategory());
 
     // products
     setProducts(await fetchProducts(categorySelected));
+    setLoading(false);
   };
 
-
-  const  getProductData = (id) =>{
+  const getProductData = (id) => {
     let productData = Products.find((product) => product.id == id);
 
     if (productData === undefined) {
@@ -40,7 +42,7 @@ function ContextProvider({ children }) {
     }
 
     return productData;
-  }
+  };
 
   function getProductQuantity(id) {
     const quantity = cartProducts.find(
@@ -127,6 +129,7 @@ function ContextProvider({ children }) {
     getTotalCost,
     setcategorySelected,
     getProductData,
+    loading,
   };
   useEffect(() => {
     requestData();
