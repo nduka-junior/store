@@ -13,7 +13,9 @@ function OtherCategory({ category ,id}) {
       <div className="othercat">
         {sortedData.map((item) => {
           return (
-            <Link to={`/store/product/${item.id}`} key={item.id} className="sss">
+            <Link to={`/store/product/${item.id}`} key={item.id} className="sss" onClick={() => {
+              window.scrollTo(0, 0);
+            }}>
               <div className="product othercat_main">
                 <img src={item.image} alt={item.title} className="sss_img" />
                 <div className="bgColor">

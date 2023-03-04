@@ -13,7 +13,7 @@ function Nav() {
   ) : (
     <div className="nav">
       <h2>JD</h2>
-      <Category />
+    
       <Link to="/store/checkout">
         <div className="nav_cart">
           <ShoppingCartIcon sx={{ fontSize: 25 }} />

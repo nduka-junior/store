@@ -38,33 +38,36 @@ function Checkout() {
               <div className="checkout_details">
                 <div className="checkout_details_items">
                   {items.map((item) => {
+                    console.log(item);
                     return (
                       <>
                         <CheckOutItems item={item} key={item.id} />
-                        {/* <h2>Total: ${getTotalCost()}</h2> */}
                       </>
                     );
                   })}
                 </div>
                 <div className="order_summary">
                   <h3>Order summary</h3>
-                  <div className="order_summary_align">
-                    <span>Subtotal</span>
-                    <span>${getTotalCost()}</span>
-                  </div>
-                  <div className="order_summary_align">
-                    <span>Shipping estimate</span>
-                    <span>$5.00</span>
-                  </div>
-                  <div className="order_summary_align">
-                    <span>Tax estimate</span>
-                    <span>${(getTotalCost() / 100).toFixed(2)}</span>
-                  </div>
-                  <div className="order_summary_align">
-                    <span>Order total</span>
-                    <span>
-                      ${(getTotalCost() + 5 + getTotalCost() / 100).toFixed(2)}
-                    </span>
+                  <div className="dd">
+                    <div className="order_summary_align">
+                      <span>Subtotal</span>
+                      <span>${getTotalCost()}</span>
+                    </div>
+                    <div className="order_summary_align">
+                      <span>Shipping estimate</span>
+                      <span>$5.00</span>
+                    </div>
+                    <div className="order_summary_align">
+                      <span>Tax estimate</span>
+                      <span>${(getTotalCost() / 100).toFixed(2)}</span>
+                    </div>
+                    <div className="order_summary_align">
+                      <span>Order total</span>
+                      <span>
+                        $
+                        {(getTotalCost() + 5 + getTotalCost() / 100).toFixed(2)}
+                      </span>
+                    </div>
                   </div>
                   <button className="product_item_buttonsss">Checkout</button>
                 </div>

@@ -9,13 +9,14 @@ import Nav from "../components/Nav";
 function ProductItem() {
   const { id } = useParams();
   const {loading}=useContext()
-
+ 
   const {
     getProductData,
     addOneToCart,
     getProductQuantity,
     removeOneFromCart,
   } = useContext();
+
   const ProductItem = getProductData(id);
   return loading ? (
     <Loading />
@@ -39,7 +40,7 @@ function ProductItem() {
                   <span>{ProductItem.rating.rate}</span>
                   <Rating
                     name="half-rating-read"
-                    defaultValue={ProductItem.rating.rate}
+                    value={ProductItem.rating.rate ? ProductItem.rating.rate : 0}
                     readOnly
                     precision={0.5}
                   />
@@ -81,7 +82,6 @@ function ProductItem() {
                           }}
                           style={{ width: "auto", marginLeft: "30px" }}
                         >
-                          {" "}
                           Checkout
                         </button>
                       </Link>

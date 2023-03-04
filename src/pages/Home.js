@@ -11,6 +11,7 @@ function Home() {
   ) : (
       <div>
         <Nav />
+        <Category />
       <Products />
     </div>
   );

@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 import ProductItem from "./pages/ProductItem";
-import Nav from "./components/Nav";
+import Error from "./pages/Error";
 function App() {
   const router = createBrowserRouter([
     {
@@ -19,6 +19,10 @@ function App() {
     {
       path: "/store/product/:id",
       element: <ProductItem />,
+    },
+    {
+      path: "*",
+      element: <Error />,
     },
   ]);
   return (

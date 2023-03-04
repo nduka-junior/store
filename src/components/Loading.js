@@ -1,7 +1,18 @@
-import React from 'react'
+import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 function Loading() {
-  return <CircularProgress />;
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignSelf: "center",
+        margin: "40%",
+      }}
+    >
+      <CircularProgress size="150px" />
+    </div>
+  );
 }
 
-export default Loading
+export default Loading;

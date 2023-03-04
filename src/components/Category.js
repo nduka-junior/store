@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useStoreContext from "../data/useContext";
-import { Link } from "react-router-dom";
 function Category() {
   const { category, setcategorySelected, loading } = useStoreContext();
+ 
 
   return (
     <div className="nav_items">
