@@ -5,9 +5,12 @@ import "../static/checkoutitems.css";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import Nav from "../components/Nav";
+
+//
+
 function Checkout() {
-  const { items, getTotalCost,loading } = useContext();
-  console.log(items);
+  const { items, getTotalCost, loading } = useContext();
+
   return loading ? (
     <Loading />
   ) : (

@@ -6,6 +6,7 @@
   color: white;
   padding: 15px 40px;
 }
+
 .nav_items {
   display: flex;
   justify-content: center;
@@ -35,9 +36,31 @@
   border-color: black;
   font-size: 17px;
 }
+.nav > .nav_img {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+}
+.nav > .nav_img > img {
+  width: 50px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+.nav > .nav_img > button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+.nav > .nav_img > button:hover {
+  color: rgb(79, 69, 229);
+}
 .nav_cart {
   position: relative;
   color: white;
+  margin-right: 30px;
 }
 .nav_cart:hover {
   color: rgb(79, 69, 229);
@@ -45,10 +68,10 @@
 .nav_cart > span {
   position: absolute;
   bottom: 0px;
-  right: -13px;
+  right: -7px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 19px;
 }
-.selected{
+.selected {
   font-size: 30px;
 }

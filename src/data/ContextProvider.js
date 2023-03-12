@@ -1,5 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { fetchCategory, fetchProducts } from "./fetchData";
+import { auth, db } from "./firebaseConfig";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { collection, getDoc, doc, setDoc } from "firebase/firestore";
 // CONXTEXT CREATION
 export const StoreContext = createContext({
   category: [],
@@ -12,7 +15,9 @@ export const StoreContext = createContext({
   getTotalCost: () => {},
   setcategorySelected: () => {},
   getProductData: () => {},
-  loading: false,
+  handleLogout: () => {},
+  loading: true,
+  authUser: null,
 });
 
 //
@@ -21,7 +26,9 @@ function ContextProvider({ children }) {
   const [Products, setProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
   const [categorySelected, setcategorySelected] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [authUser, setAuthUser] = useState(null);
+
   // fetch data
   const requestData = async () => {
     setLoading(true);
@@ -68,6 +75,7 @@ function ContextProvider({ children }) {
           quantity: 1,
         },
       ]);
+      addCartItems();
     } else {
       // product is in cart
       // [ { id: 1 , quantity: 3 }, { id: 2, quantity: 1 } ]    add to product id of 2
@@ -79,6 +87,7 @@ function ContextProvider({ children }) {
               : product // if statement is false
         )
       );
+      addCartItems();
     }
   }
 
@@ -87,6 +96,7 @@ function ContextProvider({ children }) {
 
     if (quantity === 1) {
       deleteFromCart(id);
+      addCartItems();
     } else {
       setCartProducts(
         cartProducts.map(
@@ -96,6 +106,7 @@ function ContextProvider({ children }) {
               : product // if statement is false
         )
       );
+      addCartItems();
     }
   }
   function deleteFromCart(id) {
@@ -107,6 +118,7 @@ function ContextProvider({ children }) {
         return currentProduct.id !== id;
       })
     );
+    addCartItems();
   }
 
   function getTotalCost() {
@@ -117,6 +129,75 @@ function ContextProvider({ children }) {
     });
     return totalCost;
   }
+  // AUTHENTICATION
+  const authStateChanged = (user) => {
+    setLoading(true);
+    if (!user) {
+      localStorage.setItem("authUser", null);
+      setLoading(false);
+      return;
+    }
+
+    localStorage.setItem(
+      "authUser",
+      JSON.stringify({
+        uid: user.uid,
+        user,
+      })
+    );
+    setLoading(false);
+  };
+
+  // LOGOUT
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setAuthUser(null);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  //ADD cartItems to firestore
+  const addCartItems = async () => {
+    const collectionName = authUser.uid;
+    const docRef = doc(db, "cartItems", collectionName);
+    console.log(docRef);
+    try {
+      await setDoc(docRef, {
+        cartItems: cartProducts,
+      });
+      console.log(cartProducts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //GET cartItems from firestore
+  const getCartItems = async () => {
+    const collectionName = authUser.uid;
+    console.log(collectionName + "collectionName")
+    const docRef = collection(db, "cartItems", collectionName);
+    try {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        localStorage.setItem("cartItems", "ndyka");
+      } else {
+        localStorage.setItem("cartItems", JSON.stringify([]));
+      }
+    } catch (error) {
+      console.log(error);
+      localStorage.setItem("cartItems", "ndyka");
+    }
+  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, authStateChanged);
+    setAuthUser(JSON.parse(localStorage.getItem("authUser")));
+    return () => unsubscribe();
+  }, []);
+  //
 
   const contextValue = {
     category: Category,
@@ -130,8 +211,12 @@ function ContextProvider({ children }) {
     setcategorySelected,
     getProductData,
     loading,
+    authUser,
+    handleLogout,
   };
   useEffect(() => {
+    getCartItems();
+    addCartItems();
     requestData();
   }, [categorySelected]);
 

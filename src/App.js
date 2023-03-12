@@ -6,7 +6,10 @@ import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 import ProductItem from "./pages/ProductItem";
 import Error from "./pages/Error";
+import Auth from "./pages/Auth";
+
 function App() {
+   
   const router = createBrowserRouter([
     {
       path: "/store",
@@ -21,13 +24,19 @@ function App() {
       element: <ProductItem />,
     },
     {
+      path: "/store/auth",
+      element: <Auth />,
+    },
+    {
       path: "*",
       element: <Error />,
     },
   ]);
   return (
     <ContextProvider>
-      <RouterProvider router={router} />
+     
+        <RouterProvider router={router} />
+
     </ContextProvider>
   );
 }
