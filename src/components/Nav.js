@@ -11,7 +11,7 @@ function Nav() {
 
   return loading ? (
     <Loading />
-  ) : authUser ? (
+  ) : authUser  ? (
     <div className="nav">
       <h2>JD</h2>
 
@@ -20,7 +20,7 @@ function Nav() {
         <Link to="/store/checkout">
           <div className="nav_cart">
             <ShoppingCartIcon sx={{ fontSize: 30 }} />
-            <span>{items.length}</span>
+            <span>{items.length }</span>
           </div>
         </Link>
 

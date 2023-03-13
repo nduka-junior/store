@@ -184,13 +184,16 @@ function ContextProvider({ children }) {
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-       localStorage.setItem("cartItems", JSON.stringify(docSnap.data()));
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(docSnap.data().cartItems)
+        );
       } else {
         localStorage.setItem("cartItems", JSON.stringify([]));
       }
     } catch (error) {
       console.log(error);
-   localStorage.setItem("cartItems", JSON.stringify([]));
+      localStorage.setItem("cartItems", JSON.stringify([]));
     }
     setLoading(false);
   };
@@ -216,10 +219,15 @@ function ContextProvider({ children }) {
     authUser,
     handleLogout,
   };
+  const cartItemsAsync = async () => { 
+    setLoading(true);
+    await getCartItems();
+    setCartProducts(JSON.parse(localStorage.getItem("cartItems")));
+    setLoading(false);
+  }
   useEffect(() => {
     setLoading(true);
-    getCartItems();
-     setCartProducts(JSON.parse(localStorage.getItem("cartItems")).cartItems);
+ cartItemsAsync();
     setLoading(false);
   }, [authUser]);
   //
