@@ -11,6 +11,7 @@ import Auth from "./pages/Auth";
 function App() {
    
   const router = createBrowserRouter([
+  
     {
       path: "/store",
       element: <Home />,
@@ -31,7 +32,7 @@ function App() {
       path: "*",
       element: <Error />,
     },
-  ]);
+  ],{ basename: "/store" });
   return (
     <ContextProvider>
      
