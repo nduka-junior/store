@@ -178,19 +178,21 @@ function ContextProvider({ children }) {
   };
   //GET cartItems from firestore
   const getCartItems = async () => {
+    setLoading(true);
     const collectionName = await authUser.uid;
     const docRef = doc(db, "cartItems", collectionName);
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        localStorage.setItem("cartItems", JSON.stringify(docSnap.data()));
+       localStorage.setItem("cartItems", JSON.stringify(docSnap.data()));
       } else {
         localStorage.setItem("cartItems", JSON.stringify([]));
       }
     } catch (error) {
       console.log(error);
-      localStorage.setItem("cartItems", "[]");
+   localStorage.setItem("cartItems", JSON.stringify([]));
     }
+    setLoading(false);
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged);
@@ -215,11 +217,13 @@ function ContextProvider({ children }) {
     handleLogout,
   };
   useEffect(() => {
+    setLoading(true);
     getCartItems();
-    setCartProducts(JSON.parse(localStorage.getItem("cartItems")).cartItems);
+     setCartProducts(JSON.parse(localStorage.getItem("cartItems")).cartItems);
+    setLoading(false);
   }, [authUser]);
+  //
   useEffect(() => {
-    getCartItems();
     requestData();
   }, [categorySelected]);
 

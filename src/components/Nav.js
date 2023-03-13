@@ -6,6 +6,7 @@ import "../static/nav.css";
 import { Link, Navigate } from "react-router-dom";
 function Nav() {
   const { loading, items, authUser, handleLogout } = useContext();
+
   console.log(authUser);
 
   return loading ? (
@@ -15,10 +16,7 @@ function Nav() {
       <h2>JD</h2>
 
       <div className="nav_img">
-        <img
-          src={authUser.user.photoURL}
-          alt={authUser.user.displayName}
-        />
+        <img src={authUser.user.photoURL} alt={authUser.user.displayName} />
         <Link to="/store/checkout">
           <div className="nav_cart">
             <ShoppingCartIcon sx={{ fontSize: 30 }} />
