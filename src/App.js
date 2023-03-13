@@ -32,7 +32,7 @@ function App() {
       path: "*",
       element: <Error />,
     },
-  ],{ basename: "/store" });
+  ],{ basename: "/" });
   return (
     <ContextProvider>
      
