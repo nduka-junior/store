@@ -44,7 +44,6 @@ function ContextProvider({ children }) {
     let productData = Products.find((product) => product.id == id);
 
     if (productData === undefined) {
-      console.log("Product data does not exist for ID: " + id);
       return undefined;
     }
 
@@ -65,7 +64,6 @@ function ContextProvider({ children }) {
 
   function addOneToCart(id) {
     const quantity = getProductQuantity(id);
-    console.log(JSON.parse(localStorage.getItem("cartItems")).cartItems);
     addCartItems();
     if (quantity === 0) {
       // product is not in cart
