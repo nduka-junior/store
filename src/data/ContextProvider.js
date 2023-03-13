@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useRef } from "react";
 import { fetchCategory, fetchProducts } from "./fetchData";
 import { auth, db } from "./firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -65,7 +65,8 @@ function ContextProvider({ children }) {
 
   function addOneToCart(id) {
     const quantity = getProductQuantity(id);
-
+    console.log(JSON.parse(localStorage.getItem("cartItems")).cartItems);
+    addCartItems();
     if (quantity === 0) {
       // product is not in cart
       setCartProducts([
@@ -134,6 +135,7 @@ function ContextProvider({ children }) {
     setLoading(true);
     if (!user) {
       localStorage.setItem("authUser", null);
+      localStorage.setItem("cartItems", JSON.stringify([]));
       setLoading(false);
       return;
     }
@@ -164,32 +166,30 @@ function ContextProvider({ children }) {
   const addCartItems = async () => {
     const collectionName = authUser.uid;
     const docRef = doc(db, "cartItems", collectionName);
-    console.log(docRef);
+
     try {
       await setDoc(docRef, {
         cartItems: cartProducts,
       });
-      console.log(cartProducts);
+      getCartItems();
     } catch (error) {
       console.log(error);
     }
   };
   //GET cartItems from firestore
   const getCartItems = async () => {
-    const collectionName = authUser.uid;
-    console.log(collectionName + "collectionName")
-    const docRef = collection(db, "cartItems", collectionName);
+    const collectionName = await authUser.uid;
+    const docRef = doc(db, "cartItems", collectionName);
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        localStorage.setItem("cartItems", "ndyka");
+        localStorage.setItem("cartItems", JSON.stringify(docSnap.data()));
       } else {
         localStorage.setItem("cartItems", JSON.stringify([]));
       }
     } catch (error) {
       console.log(error);
-      localStorage.setItem("cartItems", "ndyka");
+      localStorage.setItem("cartItems", "[]");
     }
   };
   useEffect(() => {
@@ -216,7 +216,10 @@ function ContextProvider({ children }) {
   };
   useEffect(() => {
     getCartItems();
-    addCartItems();
+    setCartProducts(JSON.parse(localStorage.getItem("cartItems")).cartItems);
+  }, [authUser]);
+  useEffect(() => {
+    getCartItems();
     requestData();
   }, [categorySelected]);
 

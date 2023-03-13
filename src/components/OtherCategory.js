@@ -6,7 +6,6 @@ function OtherCategory({ category ,id}) {
   const { products } = useContext();
   const sortedDatas = products.filter((item) => item.category === category)
   const sortedData=sortedDatas.filter((item)=>item.id!==id)
-  console.log(sortedData);
   return (
     <>
       <h2 className="othercat_head color">Other related products</h2>
