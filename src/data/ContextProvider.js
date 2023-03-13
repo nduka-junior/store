@@ -219,15 +219,15 @@ function ContextProvider({ children }) {
     authUser,
     handleLogout,
   };
-  const cartItemsAsync = async () => { 
+  const cartItemsAsync = async () => {
     setLoading(true);
     await getCartItems();
     setCartProducts(JSON.parse(localStorage.getItem("cartItems")));
     setLoading(false);
-  }
+  };
   useEffect(() => {
     setLoading(true);
- cartItemsAsync();
+    cartItemsAsync();
     setLoading(false);
   }, [authUser]);
   //
